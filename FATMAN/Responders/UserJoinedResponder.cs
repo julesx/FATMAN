@@ -8,7 +8,7 @@ namespace FATMAN.Responders
 {
     public class UserJoinedResponder : BaseResponder
     {
-        public override Task Respond<TEventInfo>(TEventInfo eventInfo)
+        public Task Respond(SocketGuildUser socketGuildUser)
         {
             DiscordManager.Instance.SpeakTextChannel.SendMessageAsync(":trumpet: **" + socketGuildUser.Id + "** has joined us.  Herald his arrival! :trumpet:");
             return Task.CompletedTask;

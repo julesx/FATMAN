@@ -7,9 +7,9 @@ using Discord.WebSocket;
 
 namespace FATMAN.Responders
 {
-    public class UserLeftResponder : BaseResponder
+    public class MessageReceivedResponder : BaseResponder
     {
-        public Task Respond(SocketGuildUser socketGuildUser)
+        public Task Respond(SocketMessage socketGuildUser)
         {
             return Task.CompletedTask;
         }

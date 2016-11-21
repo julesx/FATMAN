@@ -194,6 +194,7 @@
     <Compile Include="Enums\DiscordEvent.cs" />
     <Compile Include="Interfaces\IManager.cs" />
     <Compile Include="Interfaces\IResponder.cs" />
+    <Compile Include="Responders\MessageReceivedResponder.cs" />
     <Compile Include="Responders\UserJoinedResponder.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\DiscordManager.cs" />

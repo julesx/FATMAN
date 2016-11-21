@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FATMAN.Interfaces;
+using Discord;
 
 namespace FATMAN.Responders
 {
     public abstract class BaseResponder : IResponder
     {
-        public abstract Task Respond<TEventInfo>(TEventInfo eventInfo);
+        public Task Respond(ISnowflakeEntity eventInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

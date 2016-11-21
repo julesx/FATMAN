@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace FATMAN.Enums
 {
-    public enum DiscordEvent { UserJoined, UserLeft }
+    public enum DiscordEvent { UserJoined, UserLeft, MessageReceived }
 }

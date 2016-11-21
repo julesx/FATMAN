@@ -18,7 +18,7 @@ namespace FATMAN.Managers
         public IGuild Guild;
         public ITextChannel SpeakTextChannel;
 
-        private Dictionary<DiscordEvent, Action> _responders = new Dictionary<DiscordEvent, Action>();
+        private Dictionary<DiscordEvent, IResponder> _responders = new Dictionary<DiscordEvent, IResponder>();
 
         public DiscordManager()
         {
@@ -27,26 +27,23 @@ namespace FATMAN.Managers
 
         public async void InitAsync()
         {
-            //_responders.Add(DiscordEvent.UserJoined, new UserJoinedResponder().Respond<SocketGuildUser>);
-            //_responders.Add(DiscordEvent.UserLeft, new UserLeftResponder());
+            _responders.Add(DiscordEvent.UserJoined, new UserJoinedResponder());
+            _responders.Add(DiscordEvent.UserLeft, new UserLeftResponder());
+            _responders.Add(DiscordEvent.MessageReceived, new MessageReceivedResponder());
 
-            await Client.LoginAsync(TokenType.Bot, "MjUwMDg2NTk4MDgxOTA0NjQy.CxSulw.G1d-5uTOnysbbtTXpsfydh9Q5mY");
+            await Client.LoginAsync(TokenType.Bot, "MYTOKEN");
             await Client.ConnectAsync();
 
             Guild = Client.GetGuild(91374358932496384);
             
             Client.UserJoined += _responders[DiscordEvent.UserJoined].Respond;
-            Client.UserLeft += _responders[DiscordEvent.UserLeft].Respond;
-            Client.MessageReceived += Client_MessageReceived;
+            Client.MessageReceived += _responders[DiscordEvent.MessageReceived].Respond;
+
+            //Client.UserLeft += _responders[DiscordEvent.UserLeft].Respond;
 
             SpeakTextChannel = await Guild.GetTextChannelAsync(91374358932496384);
 
-            await SpeakTextChannel.SendMessageAsync(":robot: BEEP BOOP. THE FATMAN HAS ARRIVED. :robot:");
-        }
-
-        private Task Client_MessageReceived(SocketMessage arg)
-        {
-            throw new NotImplementedException();
+            //await SpeakTextChannel.SendMessageAsync(":robot: BEEP BOOP. THE FATMAN HAS ARRIVED. :robot:");
         }
     }
 }
