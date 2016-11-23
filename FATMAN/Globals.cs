@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FATMAN.Enums
+namespace FATMAN
 {
-    public enum DiscordEvent { UserJoined, UserLeft, MessageReceived, UserUpdated }
+    public static class Globals
+    {
+        public static Random Random = new Random();
+    }
 }

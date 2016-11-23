@@ -191,11 +191,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DiscordUser.cs" />
     <Compile Include="Enums\DiscordEvent.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Interfaces\IManager.cs" />
     <Compile Include="Interfaces\IResponder.cs" />
+    <Compile Include="Managers\DiscordUserManager.cs" />
     <Compile Include="Responders\MessageReceivedResponder.cs" />
-    <Compile Include="Responders\UserJoinedResponder.cs" />
+    <Compile Include="Responders\UserPresenceUpdatedResponder.cs" />
+    <Compile Include="Responders\UserUpdatedResponder.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\DiscordManager.cs" />
     <Compile Include="Program.cs" />
@@ -207,9 +211,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

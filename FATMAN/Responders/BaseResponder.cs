@@ -8,9 +8,24 @@ using Discord;
 
 namespace FATMAN.Responders
 {
-    public abstract class BaseResponder : IResponder
+    public abstract class BaseResponder<TEventInfo> : IResponder where TEventInfo : class, ISnowflakeEntity
     {
-        public Task Respond(ISnowflakeEntity eventInfo)
+        public Task RespondAsync(ISnowflakeEntity eventInfo)
+        {
+            return RespondAsync(eventInfo as TEventInfo);
+        }
+
+        public Task RespondAsync(ISnowflakeEntity beforeInfo, ISnowflakeEntity afterInfo)
+        {
+            return RespondAsync(beforeInfo as TEventInfo, afterInfo as TEventInfo);
+        }
+
+        public virtual Task RespondAsync(TEventInfo eventInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual Task RespondAsync(TEventInfo beforeInfo, TEventInfo afterInfo)
         {
             throw new NotImplementedException();
         }

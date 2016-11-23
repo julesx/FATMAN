@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Discord.WebSocket;
+using Discord;
 
 namespace FATMAN.Responders
 {
-    public class UserLeftResponder : BaseResponder
+    public class UserLeftResponder : BaseResponder<SocketGuildUser>
     {
-        public Task Respond(SocketGuildUser socketGuildUser)
+        public override Task RespondAsync(SocketGuildUser socketGuildUser)
         {
             return Task.CompletedTask;
         }

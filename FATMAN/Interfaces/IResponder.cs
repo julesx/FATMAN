@@ -9,6 +9,7 @@ namespace FATMAN.Interfaces
 {
     public interface IResponder
     {
-        Task Respond(ISnowflakeEntity eventInfo);
+        Task RespondAsync(ISnowflakeEntity eventInfo);
+        Task RespondAsync(ISnowflakeEntity beforeInfo, ISnowflakeEntity afterInfo);
     }
 }
