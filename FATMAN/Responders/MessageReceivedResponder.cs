@@ -43,11 +43,24 @@ namespace FATMAN.Responders
             var split = eventInfo.Content.Split();
             var messageFragments = new List<string>();
 
+            var discordUser = DiscordUserManager.Instance.DiscordUsers.SingleOrDefault(x => x.SocketUser.Username.ToUpper() == split[1].ToUpper());
+
             switch (split[0])
             {
-                case "!login":
+                case "!whos":
 
-                    var discordUser = DiscordUserManager.Instance.DiscordUsers.SingleOrDefault(x => x.SocketUser.Username.ToUpper() == split[1].ToUpper());
+                    switch (split[1])
+                    {
+                        case "hurr":
+                            var users = await DiscordManager.Instance.Guild.GetUsersAsync();
+                            var onlineUsers = users.Where(x => x.Status != Discord.UserStatus.Offline && x.Status != Discord.UserStatus.Unknown && !x.Username.Contains("FATMAN"));
+                            messageFragments.Add(onlineUsers.Count() + " peeps are hurr");
+                            break;
+                    }
+
+                    break;
+
+                case "!login":
 
                     if (discordUser != null)
                     {
@@ -67,7 +80,7 @@ namespace FATMAN.Responders
 
                     var powerLevel = Globals.Random.Next(10000);
 
-                    messageFragments.Add(":level_slider: <@!" + eventInfo.Author.Id + ">'s Power Level is " + powerLevel + " :level_slider:");
+                    messageFragments.Add(":level_slider: <@!" + discordUser.SocketUser.Id + ">'s Power Level is " + powerLevel + " :level_slider:");
 
                     if (powerLevel > 9000)
                     {
@@ -80,7 +93,7 @@ namespace FATMAN.Responders
 
                     var camelCount = Globals.Random.Next(100);
 
-                    messageFragments.Add(":dromedary_camel: <@!" + eventInfo.Author.Id + "> is the proud owner of " + camelCount + " camels :dromedary_camel:");
+                    messageFragments.Add(":dromedary_camel: <@!" + discordUser.SocketUser.Id + "> is the proud owner of " + camelCount + " camels :dromedary_camel:");
 
                     break;
             }
@@ -90,28 +103,36 @@ namespace FATMAN.Responders
 
         private async Task SingleWordCommandAsync(SocketMessage eventInfo)
         {
+            var messageFragments = new List<string>();
+
             switch (eventInfo.Content)
             {
+                case "!bunupaspliff":
+                    messageFragments.Add("https://goo.gl/35iDgU");
+                    break;
+
+                case "!bagman":
+                    messageFragments.Add("https://goo.gl/GKh9dN");
+                    break;
+
                 case "!uptime":
-                    await DiscordManager.Instance.SpeakTextChannel.SendMessageAsync(":clock10: The FATMAN has been awake since " + DiscordManager.Instance.StartUpTime.ToString() + " :clock10:");
+                    messageFragments.Add(":clock10: The FATMAN has been awake since " + DiscordManager.Instance.StartUpTime.ToString() + " :clock10:");
                     break;
 
                 case "!logins":
 
                     var usersWithLogins = DiscordUserManager.Instance.DiscordUsers.Where(x => x.LastLogin != null).OrderBy(x => x.LastLogin);
 
-                    var messageLines = new List<string>();
-
                     foreach (var userWithLogin in usersWithLogins)
                     {
-                        messageLines.Add("• <@!" + userWithLogin.SocketUser.Id + "> last logged in " + ((DateTime)userWithLogin.LastLogin).ToString());
+                        messageFragments.Add("• <@!" + userWithLogin.SocketUser.Id + "> last logged in " + ((DateTime)userWithLogin.LastLogin).ToString());
                     }
-
-                    if (messageLines.Any())
-                        await DiscordManager.Instance.SpeakTextChannel.SendMessageAsync(string.Join(Environment.NewLine, messageLines));
 
                     break;
             }
+
+            if (messageFragments.Any())
+                await DiscordManager.Instance.SpeakTextChannel.SendMessageAsync(string.Join(Environment.NewLine, messageFragments));
         }
     }
 }
