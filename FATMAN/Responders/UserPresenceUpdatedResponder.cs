@@ -13,12 +13,15 @@ namespace FATMAN.Responders
     {
         public async Task RespondAsync(Optional<SocketGuild> arg1, SocketUser arg2, SocketPresence arg3, SocketPresence arg4)
         {
+            var discordUser = DiscordUserManager.Instance.GetDiscordUser(arg2.Id);
+
+            if (discordUser == null)
+                return;
+
             var messageFragments = new List<string>();
 
             if (arg3.Status == UserStatus.Offline && (arg4.Status == UserStatus.AFK || arg4.Status == UserStatus.Online || arg4.Status == UserStatus.Idle))
             {
-                var discordUser = DiscordUserManager.Instance.GetDiscordUser(arg2.Id);
-
                 if (discordUser.LastLogin != null && discordUser.LastLogin >= DateTime.Now.AddHours(-4))
                 {
                     messageFragments.Add(":trumpet: **<@!" + arg2.Id + ">** has joined us.  Herald his arrival! :trumpet:");
@@ -31,7 +34,7 @@ namespace FATMAN.Responders
                 switch (arg4.Game.Value.Name)
                 {
                     case "Wargame Red Dragon":
-                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** has engaged on the battlefield of the red dragon :crossed_swords:");
+                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** has engaged the enemy on the battlefield of the red dragon :crossed_swords:");
                         break;
 
                     case "Overwatch":
@@ -50,7 +53,6 @@ namespace FATMAN.Responders
                         messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** has entered the field of battle :crossed_swords:");
                         break;
                 }
-
             }
 
             await DiscordManager.Instance.SpeakTextChannel.SendMessageAsync(string.Join(Environment.NewLine, messageFragments));
