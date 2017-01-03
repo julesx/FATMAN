@@ -32,7 +32,7 @@ namespace FATMAN.Managers
             _responders.Add(DiscordEvent.MessageReceived, new MessageReceivedResponder());
             _responders.Add(DiscordEvent.UserUpdated, new UserUpdatedResponder());
 
-            await Client.LoginAsync(TokenType.Bot, "MjUwMDg2NTk4MDgxOTA0NjQy.CxSulw.G1d-5uTOnysbbtTXpsfydh9Q5mY");
+            await Client.LoginAsync(TokenType.Bot, "MjUwMDg2NTk4MDgxOTA0NjQy.CzW2WQ.eIgYZh3T9d408NsU0xRjQPh9POs");
             await Client.ConnectAsync();
 
             StartUpTime = DateTime.Now;

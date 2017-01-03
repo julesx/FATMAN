@@ -22,10 +22,10 @@ namespace FATMAN.Responders
 
             if (arg3.Status == UserStatus.Offline && (arg4.Status == UserStatus.AFK || arg4.Status == UserStatus.Online || arg4.Status == UserStatus.Idle))
             {
-                if (discordUser.LastLogin != null && discordUser.LastLogin >= DateTime.Now.AddHours(-4))
-                {
-                    messageFragments.Add(":trumpet: **<@!" + arg2.Id + ">** has joined us.  Herald his arrival! :trumpet:");
-                }
+                //if (discordUser.LastLogin != null && discordUser.LastLogin >= DateTime.Now.AddHours(-4))
+                //{
+                //    messageFragments.Add(":trumpet: **<@!" + arg2.Id + ">** has joined us.  Herald his arrival! :trumpet:");
+                //}
 
                 discordUser.UpdateLastLogin();
             }
@@ -34,11 +34,11 @@ namespace FATMAN.Responders
                 switch (arg4.Game.Value.Name)
                 {
                     case "Wargame Red Dragon":
-                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** has engaged the enemy on the battlefield of the red dragon :crossed_swords:");
+                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** is launching several PPK Fagots :crossed_swords:");
                         break;
 
                     case "Overwatch":
-                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** is now under sighting :crossed_swords:");
+                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** is now ... SHPOURTEEEEING :crossed_swords:");
                         break;
 
                     case "Diablo 3":
@@ -46,7 +46,15 @@ namespace FATMAN.Responders
                         break;
 
                     case "Starcraft 2":
-                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** just brought his battlecruiser online :crossed_swords:");
+                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** is now firing it up :crossed_swords:");
+                        break;
+
+                    case "Counter-Strike: Global Offensive":
+                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** has entered a virtual combat arena :crossed_swords:");
+                        break;
+
+                    case "Shadow Tactics":
+                        messageFragments.Add(":crossed_swords: **<@!" + arg2.Id + ">** is a silent ninja :crossed_swords:");
                         break;
 
                     default:

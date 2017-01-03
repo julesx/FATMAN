@@ -180,6 +180,7 @@
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -196,6 +197,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Interfaces\IManager.cs" />
     <Compile Include="Interfaces\IResponder.cs" />
+    <Compile Include="Json Structures\CalEvent.cs" />
     <Compile Include="Managers\DiscordUserManager.cs" />
     <Compile Include="Responders\MessageReceivedResponder.cs" />
     <Compile Include="Responders\UserPresenceUpdatedResponder.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responders\BaseResponder.cs" />
     <Compile Include="Responders\UserLeftResponder.cs" />
+    <Compile Include="XML Structures\CheeseDirectory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
